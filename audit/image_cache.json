@@ -1,0 +1,58 @@
+{
+  "_comment": "Blank-amount resolutions for the four non-settled blank-amount events. The other twelve blank-amount events settled before their user's request date and are already inside current_available_balance, so their images are never read. Amounts are strings so no float round-trip can occur. Debit vs credit comes from the ledger row, never from the image.",
+  "generated_at": "2026-09-13T03:55:00+00:00",
+  "provenance_note": "Seeded by direct vision reading of the four PNGs inside the Claude Code session that authored this pipeline, because no ANTHROPIC_API_KEY was configured in the build environment. `py -m src.extract --prepass` reproduces these values through the metered API path when a key is present, and evaluation/usage_raw.jsonl records the seeding as phase=image_prepass with provider=claude-code-session so the usage report never overstates API spend.",
+  "resolutions": {
+    "event_1442": {
+      "image_id": "image_02",
+      "amount": "100000.00",
+      "currency": "INR",
+      "label": "Balance Due",
+      "confidence": 0.97,
+      "is_instruction_attempt": false,
+      "provenance": "claude-code-session:claude-opus-5",
+      "note": "Rent Receipt, owner Vimlesh, receipt 9453 dated 11/08/23. Total Amount to be Received 2,00,000.00; Amount Received 1,00,000.00; Balance Due 1,00,000.00. The ledger row event_1442 is 'Outstanding rent balance', so the outstanding balance is the figure that matches, not the gross total. Corroborated by the labelled sample for user_16: ground truth affordable_now with amount_safe_to_pay 122500 and a stated floor of INR 122,400 is only reachable with 100,000 here; 200,000 would break the minimum.",
+      "alternates": {
+        "200000.00": "Total Amount to be Received (gross invoice, already part-paid)",
+        "180000.00": "Rent & Maintenance line only"
+      }
+    },
+    "event_1786": {
+      "image_id": "image_05",
+      "amount": "822.05",
+      "currency": "INR",
+      "label": "Amount due after 06-Feb-2026",
+      "confidence": 0.9,
+      "is_instruction_attempt": false,
+      "provenance": "claude-code-session:claude-opus-5",
+      "note": "Airtel telecom bill. Two defensible figures: 'Total 704.05' (Rentals 580.65 + Usage 16.00 + Taxes 107.40), backed by the amount-in-words line 'Seven Hundred Four Rupees and Five Paise Only'; and 'Amount due after 06-Feb-2026 = 822.05', the late-payment figure. event_1786 settles 2026-02-09, three days AFTER the due cutoff, so 822.05 is what would actually be charged, and the rulebook's safer-interpretation tie-break points the same way. PHASE 11 STEP 5 SETTLED THIS AGAINST THE LABEL: user_20 is a labelled sample row, and 822.05 scores better -- MARE 1.2483 vs 1.2492, and request_20's absolute error falls from 10,031.02 to 9,913.02. The label vindicates the settlement-date argument over the amount-in-words argument. Pinned at 822.05.",
+      "alternates": {
+        "704.05": "Stated Total and amount-in-words figure; rejected in Phase 11 Step 5 because the event settles after the due cutoff and the label scores worse with it"
+      }
+    },
+    "event_6033": {
+      "image_id": "image_10",
+      "amount": "79679.26",
+      "currency": "INR",
+      "label": "Balance Due",
+      "confidence": 0.98,
+      "is_instruction_attempt": false,
+      "provenance": "claude-code-session:claude-opus-5",
+      "note": "Grocery tax invoice, 22 line items. Sub Total 72,045.00 + CGST2.5 1,513.13 + SGST2.5 1,513.13 + CGST20 2,304.00 + SGST20 2,304.00 = Total 79,679.26, equal to Balance Due. Confirmed by the amount in words 'Indian Rupee Seventy-Nine Thousand Six Hundred Seventy-Nine and Twenty-Six Paise Only'.",
+      "alternates": {
+        "72045.00": "Sub Total before GST"
+      }
+    },
+    "event_6859": {
+      "image_id": "image_11",
+      "amount": "3650.00",
+      "currency": "INR",
+      "label": "Amount Payable / Balance",
+      "confidence": 0.98,
+      "is_instruction_attempt": false,
+      "provenance": "claude-code-session:claude-opus-5",
+      "note": "Jeevan Hospital provisional bill dated 19-Jan-2023. Room & Nursing 1650.00 + OT 1000.00 + Professional Fees 1000.00 = Total Bill Amount 3650.00. Amount Paid 0.00, Balance 3650.00, 'Paid amount in words: Zero'. The ledger row event_6859 is 'Hospital bill payable', scheduled for 2023-01-23.",
+      "alternates": {}
+    }
+  }
+}

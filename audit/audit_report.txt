@@ -1,0 +1,1413 @@
+==============================================================================
+BUY OR WAIT? - PHASE 1 DATA AUDIT
+==============================================================================
+repository root : C:\Users\yashm\OneDrive\Projects\Hackerrank September
+dataset         : C:\Users\yashm\OneDrive\Projects\Hackerrank September\dataset
+csv files       : 9 (exchange_rates.csv, financial_events.csv, financial_profiles.csv, images.csv, messages.csv, output.csv, request_payment_options.csv, requests.csv, sample_requests.csv)
+media/images    : 16 files
+distinct-value listing threshold: fewer than 30 distinct values
+
+==============================================================================
+FILE: dataset/exchange_rates.csv
+==============================================================================
+rows (excluding header): 134
+columns (4): rate_date, from_currency, to_currency, rate
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+rate_date                                      date (YYYY-MM-DD)                  0        39   (null 0.0%)
+from_currency                                  str (len 3-3)                      0         2   (null 0.0%)
+to_currency                                    str (len 3-3)                      0         5   (null 0.0%)
+rate                                           float (int-like 22/134)            0         5   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  from_currency  (2 distinct)
+      USD                                                                 88
+      EUR                                                                 46
+
+  to_currency  (5 distinct)
+      INR                                                                 33
+      IDR                                                                 30
+      EUR                                                                 25
+      USD                                                                 24
+      ZAR                                                                 22
+
+  rate  (5 distinct)
+      83.33                                                               33
+      15833.33                                                            30
+      0.92                                                                25
+      1.09                                                                24
+      20                                                                  22
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  rate_date:
+      2023-10-15
+      2023-11-15
+      2023-12-15
+      2024-01-15
+      2024-02-15
+
+==============================================================================
+FILE: dataset/financial_events.csv
+==============================================================================
+rows (excluding header): 25342
+columns (14): event_id, user_id, event_type, description, category, direction, amount, currency, event_date, settlement_date, status, linked_event_id, flexibility, minimum_allowed_amount
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+event_id                                       str (id token)                     0     25342   (null 0.0%)
+user_id                                        str (id token)                     0       275   (null 0.0%)
+event_type                                     str (len 6-20)                     0         8   (null 0.0%)
+description                                    str (len 9-34)                     0       164   (null 0.0%)
+category                                       str (len 3-19)                     0        22   (null 0.0%)
+direction                                      str (len 5-8)                      0         3   (null 0.0%)
+amount                                         float (int-like 5917/25326)       16     17785   (null 0.1%)
+currency                                       str (len 3-3)                      0         5   (null 0.0%)
+event_date                                     date (YYYY-MM-DD)                  0      1308   (null 0.0%)
+settlement_date                                date (YYYY-MM-DD)                 10      1310   (null 0.0%)
+status                                         str (len 6-10)                     0         6   (null 0.0%)
+linked_event_id                                str (id token)                 25284        58   (null 99.8%)
+flexibility                                    str (len 5-22)                     0         4   (null 0.0%)
+minimum_allowed_amount                         float (int-like 1779/2907)     22435       301   (null 88.5%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  event_type  (8 distinct)
+      expense                                                          20525
+      subscription                                                      2488
+      income                                                            1696
+      debt_payment                                                       567
+      investment_purchase                                                 29
+      refund                                                              22
+      investment_valuation                                                10
+      investment_sale                                                      5
+
+  category  (22 distinct)
+      groceries                                                         5812
+      transport                                                         5626
+      dining                                                            3479
+      salary                                                            1690
+      utilities                                                         1452
+      rent                                                              1355
+      cloud_storage                                                      833
+      shopping                                                           813
+      streaming                                                          683
+      debt_repayment                                                     553
+      entertainment                                                      521
+      insurance                                                          456
+      music_subscription                                                 451
+      healthcare                                                         356
+      delivery_membership                                                351
+      education                                                          306
+      housing                                                            246
+      gym                                                                170
+      family_support                                                     125
+      investment                                                          44
+      work_expense                                                        14
+      windfall                                                             6
+
+  direction  (3 distinct)
+      debit                                                            23609
+      credit                                                            1723
+      non_cash                                                            10
+
+  currency  (5 distinct)
+      INR                                                               6457
+      EUR                                                               5585
+      IDR                                                               4992
+      ZAR                                                               4489
+      USD                                                               3819
+
+  status  (6 distinct)
+      settled                                                          25148
+      pending                                                             71
+      scheduled                                                           70
+      cancelled                                                           22
+      failed                                                              21
+      unrealized                                                          10
+
+  flexibility  (4 distinct)
+      fixed                                                            21138
+      reducible                                                         2682
+      stoppable                                                         1297
+      reducible_or_stoppable                                             225
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  event_id:
+      event_01
+      event_02
+      event_03
+      event_04
+      event_05
+  user_id:
+      user_01
+      user_02
+      user_03
+      user_04
+      user_05
+  description:
+      Apartment rent transfer
+      Household utility payment
+      Professional training fee
+      Education loan instalment
+      Music service subscription
+  amount:
+      5148
+      1475.46
+      1821.6
+      3487
+      235.4
+  event_date:
+      2023-10-02
+      2023-10-06
+      2023-10-08
+      2023-10-11
+      2023-10-13
+  settlement_date:
+      2023-10-02
+      2023-10-06
+      2023-10-08
+      2023-10-11
+      2023-10-13
+  linked_event_id:
+      event_98
+      event_100
+      event_1543
+      event_1784
+      event_1855
+  minimum_allowed_amount:
+      489.5
+      670700
+      58900
+      66120
+      692550
+
+==============================================================================
+FILE: dataset/financial_profiles.csv
+==============================================================================
+rows (excluding header): 275
+columns (10): user_id, home_currency, current_available_balance, minimum_balance_to_keep, financial_priorities, expense_categories_to_protect, expense_categories_user_is_willing_to_reduce, expense_categories_user_is_willing_to_stop, payment_methods_user_will_consider, max_installment_months
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+user_id                                        str (id token)                     0       275   (null 0.0%)
+home_currency                                  str (len 3-3)                      0         5   (null 0.0%)
+current_available_balance                      float (int-like 102/275)           0       275   (null 0.0%)
+minimum_balance_to_keep                        int                                0       192   (null 0.0%)
+financial_priorities                           list[str] (pipe-separated)         0         9   (null 0.0%)
+expense_categories_to_protect                  list[str] (pipe-separated)         0         8   (null 0.0%)
+expense_categories_user_is_willing_to_reduce   list[str] (pipe-separated)        39        18   (null 14.2%)
+expense_categories_user_is_willing_to_stop     list[str] (pipe-separated)        62        10   (null 22.5%)
+payment_methods_user_will_consider             list[str] (pipe-separated)         0         7   (null 0.0%)
+max_installment_months                         int                              119        11   (null 43.3%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  home_currency  (5 distinct)
+      INR                                                                 67
+      EUR                                                                 62
+      IDR                                                                 55
+      ZAR                                                                 51
+      USD                                                                 40
+
+  financial_priorities  (9 distinct)
+      emergency_savings|travel                                            46
+      retirement_investment|emergency_savings                             42
+      education|debt_repayment                                            36
+      education|emergency_savings                                         34
+      emergency_savings|housing                                           29
+      healthcare|family_support                                           25
+      education|family_support                                            24
+      debt_repayment|emergency_savings                                    20
+      healthcare|retirement_investment                                    19
+
+  expense_categories_to_protect  (8 distinct)
+      rent|groceries|transport                                            63
+      rent|insurance|transport                                            46
+      rent|utilities|groceries                                            42
+      rent|education|groceries|debt_repayment                             36
+      rent|healthcare|family_support|groceries                            25
+      housing|utilities|education                                         24
+      rent|utilities|debt_repayment                                       20
+      housing|healthcare|utilities                                        19
+
+  expense_categories_user_is_willing_to_reduce  (18 distinct)
+      dining                                                              80
+      shopping                                                            35
+      dining|streaming                                                    22
+      dining|entertainment                                                20
+      streaming                                                           17
+      dining|streaming|shopping                                           12
+      dining|shopping                                                     10
+      streaming|shopping                                                   8
+      gym                                                                  6
+      entertainment                                                        5
+      streaming|entertainment                                              5
+      dining|gym|entertainment                                             4
+      shopping|entertainment                                               4
+      dining|gym                                                           2
+      dining|shopping|entertainment                                        2
+      gym|entertainment                                                    2
+      dining|streaming|entertainment                                       1
+      streaming|shopping|entertainment                                     1
+
+  expense_categories_user_is_willing_to_stop  (10 distinct)
+      cloud_storage                                                       57
+      streaming|cloud_storage                                             52
+      streaming                                                           32
+      music_subscription                                                  26
+      music_subscription|delivery_membership                              24
+      delivery_membership                                                 10
+      gym|music_subscription                                               4
+      gym|music_subscription|delivery_membership                           4
+      gym|delivery_membership                                              3
+      gym                                                                  1
+
+  payment_methods_user_will_consider  (7 distinct)
+      full_payment                                                        60
+      partial_payment|installments                                        52
+      installments                                                        41
+      full_payment|partial_payment                                        40
+      full_payment|installments                                           35
+      full_payment|partial_payment|installments                           28
+      partial_payment                                                     19
+
+  max_installment_months  (11 distinct)
+      3                                                                   18
+      4                                                                   17
+      11                                                                  16
+      12                                                                  16
+      5                                                                   16
+      2                                                                   15
+      7                                                                   14
+      6                                                                   13
+      10                                                                  12
+      8                                                                   10
+      9                                                                    9
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  user_id:
+      user_01
+      user_02
+      user_03
+      user_04
+      user_05
+  current_available_balance:
+      58481.1
+      60383889.2
+      5810300
+      52206950
+      46475.1
+  minimum_balance_to_keep:
+      18000
+      29158400
+      2668700
+      30686600
+      13100
+
+==============================================================================
+FILE: dataset/images.csv
+==============================================================================
+rows (excluding header): 16
+columns (4): image_id, user_id, request_id, related_event_id
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+image_id                                       str (id token)                     0        16   (null 0.0%)
+user_id                                        str (id token)                     0        16   (null 0.0%)
+request_id                                     str (id token)                     0        16   (null 0.0%)
+related_event_id                               str (id token)                     0        16   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  image_id  (16 distinct)
+      image_01                                                             1
+      image_02                                                             1
+      image_03                                                             1
+      image_04                                                             1
+      image_05                                                             1
+      image_06                                                             1
+      image_07                                                             1
+      image_08                                                             1
+      image_09                                                             1
+      image_10                                                             1
+      image_11                                                             1
+      image_12                                                             1
+      image_13                                                             1
+      image_14                                                             1
+      image_15                                                             1
+      image_16                                                             1
+
+  user_id  (16 distinct)
+      user_03                                                              1
+      user_101                                                             1
+      user_105                                                             1
+      user_113                                                             1
+      user_16                                                              1
+      user_17                                                              1
+      user_19                                                              1
+      user_20                                                              1
+      user_33                                                              1
+      user_35                                                              1
+      user_48                                                              1
+      user_55                                                              1
+      user_64                                                              1
+      user_73                                                              1
+      user_78                                                              1
+      user_84                                                              1
+
+  request_id  (16 distinct)
+      request_03                                                           1
+      request_101                                                          1
+      request_105                                                          1
+      request_113                                                          1
+      request_16                                                           1
+      request_17                                                           1
+      request_19                                                           1
+      request_20                                                           1
+      request_33                                                           1
+      request_35                                                           1
+      request_48                                                           1
+      request_55                                                           1
+      request_64                                                           1
+      request_73                                                           1
+      request_78                                                           1
+      request_84                                                           1
+
+  related_event_id  (16 distinct)
+      event_10521                                                          1
+      event_1442                                                           1
+      event_1545                                                           1
+      event_1700                                                           1
+      event_1786                                                           1
+      event_253                                                            1
+      event_3051                                                           1
+      event_3231                                                           1
+      event_4535                                                           1
+      event_5170                                                           1
+      event_6033                                                           1
+      event_6859                                                           1
+      event_7307                                                           1
+      event_7941                                                           1
+      event_9421                                                           1
+      event_9806                                                           1
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+
+==============================================================================
+FILE: dataset/messages.csv
+==============================================================================
+rows (excluding header): 215
+columns (7): message_id, user_id, request_id, related_event_id, sent_at, source_type, message_text
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+message_id                                     str (id token)                     0       215   (null 0.0%)
+user_id                                        str (id token)                     0       215   (null 0.0%)
+request_id                                     str (id token)                    87       128   (null 40.5%)
+related_event_id                               str (id token)                   176        39   (null 81.9%)
+sent_at                                        datetime (ISO-8601)                0       120   (null 0.0%)
+source_type                                    str (len 4-17)                     0         5   (null 0.0%)
+message_text                                   str (len 127-330)                  0       215   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  source_type  (5 distinct)
+      employer                                                           126
+      service_provider                                                    31
+      financial_service                                                   23
+      bank                                                                18
+      merchant                                                            17
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  message_id:
+      message_01
+      message_02
+      message_03
+      message_04
+      message_05
+  user_id:
+      user_02
+      user_03
+      user_04
+      user_06
+      user_07
+  request_id:
+      request_03
+      request_04
+      request_06
+      request_08
+      request_10
+  related_event_id:
+      event_1785
+      event_1960
+      event_2165
+      event_3230
+      event_3491
+  sent_at:
+      2025-07-29T09:30:00Z
+      2019-08-31T09:30:00Z
+      2024-06-01T09:30:00Z
+      2025-12-28T09:30:00Z
+      2024-08-29T09:30:00Z
+  message_text:
+      Rincian penggajian Anda di Cobalt Systems telah berubah. Gaji bulanan...
+      Tim payroll BrightPath Media telah mengirim pembaruan. Gaji rutin unt...
+      Rincian penggajian Anda di Greenfield Foods telah berubah. Bonus kuar...
+      Here’s the latest payroll information from Northstar Labs. Your tempo...
+      BrightPath Media has updated your payroll record. Your confirmed sala...
+
+==============================================================================
+FILE: dataset/output.csv
+==============================================================================
+rows (excluding header): 250
+columns (8): request_id, amount_safe_to_pay, affordability_status, recommended_payment_method, payment_plan, earliest_date_for_full_payment, spending_changes_needed, decision_explanation
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+request_id                                     str (id token)                     0       250   (null 0.0%)
+amount_safe_to_pay                             empty (all blank)                250         0   (null 100.0%)
+affordability_status                           empty (all blank)                250         0   (null 100.0%)
+recommended_payment_method                     empty (all blank)                250         0   (null 100.0%)
+payment_plan                                   empty (all blank)                250         0   (null 100.0%)
+earliest_date_for_full_payment                 empty (all blank)                250         0   (null 100.0%)
+spending_changes_needed                        empty (all blank)                250         0   (null 100.0%)
+decision_explanation                           empty (all blank)                250         0   (null 100.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  (none: every column has 30+ distinct values or is entirely blank)
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  request_id:
+      request_26
+      request_27
+      request_28
+      request_29
+      request_30
+
+==============================================================================
+FILE: dataset/request_payment_options.csv
+==============================================================================
+rows (excluding header): 790
+columns (9): payment_option_id, request_id, payment_method, payment_amount, number_of_payments, first_payment_date, payment_frequency_days, financing_fee, total_payable_amount
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+payment_option_id                              str (id token)                     0       790   (null 0.0%)
+request_id                                     str (id token)                     0       275   (null 0.0%)
+payment_method                                 str (len 12-12)                    0         2   (null 0.0%)
+payment_amount                                 float (int-like 267/790)           0       787   (null 0.0%)
+number_of_payments                             int                                0         9   (null 0.0%)
+first_payment_date                             date (YYYY-MM-DD)                  0       194   (null 0.0%)
+payment_frequency_days                         int                              275         3   (null 34.8%)
+financing_fee                                  float (int-like 373/790)           0       515   (null 0.0%)
+total_payable_amount                           float (int-like 289/790)           0       787   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  payment_method  (2 distinct)
+      installments                                                       515
+      full_payment                                                       275
+
+  number_of_payments  (9 distinct)
+      1                                                                  275
+      24                                                                  96
+      15                                                                  89
+      21                                                                  88
+      18                                                                  87
+      3                                                                   80
+      6                                                                   65
+      2                                                                    7
+      4                                                                    3
+
+  payment_frequency_days  (3 distinct)
+      28                                                                 180
+      31                                                                 169
+      30                                                                 166
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  payment_option_id:
+      payment_option_01
+      payment_option_02
+      payment_option_03
+      payment_option_04
+      payment_option_05
+  request_id:
+      request_01
+      request_02
+      request_03
+      request_04
+      request_05
+  payment_amount:
+      25256
+      1852.11
+      4546.08
+      1283.85
+      15952906.67
+  first_payment_date:
+      2024-03-03
+      2024-03-06
+      2024-03-10
+      2024-03-17
+      2025-08-08
+  financing_fee:
+      0
+      2525.65
+      2020.48
+      5556.4
+      1840720.01
+  total_payable_amount:
+      25256
+      27781.65
+      27276.48
+      30812.4
+      47858720.01
+
+==============================================================================
+FILE: dataset/requests.csv
+==============================================================================
+rows (excluding header): 250
+columns (8): request_id, user_id, request_date, request_type, requested_amount, desired_completion_date, allows_partial_payment, request_text
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+request_id                                     str (id token)                     0       250   (null 0.0%)
+user_id                                        str (id token)                     0       250   (null 0.0%)
+request_date                                   date (YYYY-MM-DD)                  0        61   (null 0.0%)
+request_type                                   str (len 5-17)                     0         9   (null 0.0%)
+requested_amount                               float (int-like 170/250)           0       248   (null 0.0%)
+desired_completion_date                        date (YYYY-MM-DD)                  0       170   (null 0.0%)
+allows_partial_payment                         bool (true/false)                  0         2   (null 0.0%)
+request_text                                   str (len 84-181)                   0       250   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  request_type  (9 distinct)
+      debt_repayment                                                      28
+      education                                                           28
+      family_transfer                                                     28
+      housing                                                             28
+      investment                                                          28
+      purchase                                                            28
+      travel                                                              28
+      emergency_expense                                                   27
+      other                                                               27
+
+  allows_partial_payment  (2 distinct)
+      false                                                              170
+      true                                                                80
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+  request_id:
+      request_26
+      request_27
+      request_28
+      request_29
+      request_30
+  user_id:
+      user_26
+      user_27
+      user_28
+      user_29
+      user_30
+  request_date:
+      2025-08-03
+      2026-07-05
+      2024-06-07
+      2025-11-04
+      2026-04-06
+  requested_amount:
+      15656000
+      6670
+      1302.4
+      51524
+      775.2
+  desired_completion_date:
+      2025-10-07
+      2026-08-21
+      2024-08-15
+      2025-11-23
+      2026-06-06
+  request_text:
+      I've been asked to transfer IDR 15,656,000 to my family. I need to co...
+      Can I make this purchase without dipping into the balance I want to k...
+      I'm planning an investment contribution of EUR 1,302.40. What portion...
+      Would investing this amount leave my upcoming bills covered? I have a...
+      The additional loan payment would be USD 775.20. I need to complete i...
+
+==============================================================================
+FILE: dataset/sample_requests.csv
+==============================================================================
+rows (excluding header): 25
+columns (15): request_id, user_id, request_date, request_type, requested_amount, desired_completion_date, allows_partial_payment, request_text, amount_safe_to_pay, affordability_status, recommended_payment_method, payment_plan, earliest_date_for_full_payment, spending_changes_needed, decision_explanation
+
+column                                         dtype                          nulls  distinct
+---------------------------------------------- ---------------------------- ------- ---------
+request_id                                     str (id token)                     0        25   (null 0.0%)
+user_id                                        str (id token)                     0        25   (null 0.0%)
+request_date                                   date (YYYY-MM-DD)                  0        25   (null 0.0%)
+request_type                                   str (len 5-17)                     0         9   (null 0.0%)
+requested_amount                               float (int-like 17/25)             0        25   (null 0.0%)
+desired_completion_date                        date (YYYY-MM-DD)                  0        24   (null 0.0%)
+allows_partial_payment                         bool (true/false)                  0         2   (null 0.0%)
+request_text                                   str (len 91-171)                   0        25   (null 0.0%)
+amount_safe_to_pay                             float (int-like 14/25)             0        25   (null 0.0%)
+affordability_status                           str (len 14-20)                    0         4   (null 0.0%)
+recommended_payment_method                     str (len 4-15)                     0         5   (null 0.0%)
+payment_plan                                   list[str] (pipe-separated)         0        19   (null 0.0%)
+earliest_date_for_full_payment                 date (YYYY-MM-DD)                  7        17   (null 28.0%)
+spending_changes_needed                        list[str] (pipe-separated)         0         4   (null 0.0%)
+decision_explanation                           str (len 85-158)                   0        25   (null 0.0%)
+
+DISTINCT VALUES (columns with fewer than 30 distinct non-blank values)
+------------------------------------------------------------------------------
+  request_id  (25 distinct)
+      request_01                                                           1
+      request_02                                                           1
+      request_03                                                           1
+      request_04                                                           1
+      request_05                                                           1
+      request_06                                                           1
+      request_07                                                           1
+      request_08                                                           1
+      request_09                                                           1
+      request_10                                                           1
+      request_11                                                           1
+      request_12                                                           1
+      request_13                                                           1
+      request_14                                                           1
+      request_15                                                           1
+      request_16                                                           1
+      request_17                                                           1
+      request_18                                                           1
+      request_19                                                           1
+      request_20                                                           1
+      request_21                                                           1
+      request_22                                                           1
+      request_23                                                           1
+      request_24                                                           1
+      request_25                                                           1
+
+  user_id  (25 distinct)
+      user_01                                                              1
+      user_02                                                              1
+      user_03                                                              1
+      user_04                                                              1
+      user_05                                                              1
+      user_06                                                              1
+      user_07                                                              1
+      user_08                                                              1
+      user_09                                                              1
+      user_10                                                              1
+      user_11                                                              1
+      user_12                                                              1
+      user_13                                                              1
+      user_14                                                              1
+      user_15                                                              1
+      user_16                                                              1
+      user_17                                                              1
+      user_18                                                              1
+      user_19                                                              1
+      user_20                                                              1
+      user_21                                                              1
+      user_22                                                              1
+      user_23                                                              1
+      user_24                                                              1
+      user_25                                                              1
+
+  request_date  (25 distinct)
+      2019-09-03                                                           1
+      2023-08-12                                                           1
+      2024-03-03                                                           1
+      2024-03-06                                                           1
+      2024-03-07                                                           1
+      2024-06-04                                                           1
+      2024-09-04                                                           1
+      2024-09-05                                                           1
+      2024-12-05                                                           1
+      2024-12-06                                                           1
+      2025-02-07                                                           1
+      2025-05-03                                                           1
+      2025-05-07                                                           1
+      2025-08-04                                                           1
+      2025-08-05                                                           1
+      2025-11-06                                                           1
+      2026-01-03                                                           1
+      2026-01-04                                                           1
+      2026-01-06                                                           1
+      2026-02-07                                                           1
+      2026-03-01                                                           1
+      2026-04-03                                                           1
+      2026-04-05                                                           1
+      2026-07-04                                                           1
+      2026-07-07                                                           1
+
+  request_type  (9 distinct)
+      debt_repayment                                                       3
+      education                                                            3
+      family_transfer                                                      3
+      housing                                                              3
+      investment                                                           3
+      purchase                                                             3
+      travel                                                               3
+      emergency_expense                                                    2
+      other                                                                2
+
+  requested_amount  (25 distinct)
+      109600                                                               1
+      122500                                                               1
+      12693000                                                             1
+      13110000                                                             1
+      15488                                                                1
+      1574.4                                                               1
+      166.61                                                               1
+      197400                                                               1
+      25256                                                                1
+      266700                                                               1
+      274600                                                               1
+      303700                                                               1
+      3246.1                                                               1
+      3685                                                                 1
+      38016                                                                1
+      39660                                                                1
+      46018000                                                             1
+      5414.2                                                               1
+      5491000                                                              1
+      60496000                                                             1
+      620.4                                                                1
+      65164                                                                1
+      731.5                                                                1
+      941.6                                                                1
+      996.6                                                                1
+
+  desired_completion_date  (24 distinct)
+      2025-02-10                                                           2
+      2019-11-15                                                           1
+      2023-10-11                                                           1
+      2024-03-20                                                           1
+      2024-04-17                                                           1
+      2024-05-15                                                           1
+      2024-06-19                                                           1
+      2024-10-04                                                           1
+      2024-11-14                                                           1
+      2025-04-15                                                           1
+      2025-06-12                                                           1
+      2025-07-15                                                           1
+      2025-10-04                                                           1
+      2025-10-10                                                           1
+      2026-01-12                                                           1
+      2026-01-14                                                           1
+      2026-02-01                                                           1
+      2026-02-08                                                           1
+      2026-02-22                                                           1
+      2026-04-14                                                           1
+      2026-05-04                                                           1
+      2026-06-20                                                           1
+      2026-07-23                                                           1
+      2026-09-15                                                           1
+
+  allows_partial_payment  (2 distinct)
+      false                                                               13
+      true                                                                12
+
+  request_text  (25 distinct)
+      Can I buy the laptop now without making next month's bills tight? I n...       1
+      Can I clear this additional amount without putting upcoming bills at ...       1
+      Can I complete this family transfer and still keep my minimum balance...       1
+      Does paying for the trip now leave enough for the rest of the month? ...       1
+      How much can I invest now without affecting essential payments? I nee...       1
+      How much extra can I put toward the loan today? I need to decide by 1...       1
+      How much of the rental deposit can I safely pay today? I need to deci...       1
+      I can book the family trip for INR 303,700. Would it be safer to book...       1
+      I want to put EUR 620.40 into an investment. I need to complete it by...       1
+      I'm considering setting aside INR 109,600 for an investment. Would in...       1
+      I'm planning an extra loan payment of EUR 5,414.20. I need to complet...       1
+      Is it safe to cover the full course fee by the deadline? Enrolment fo...       1
+      Is the deposit affordable now, or do I need more time? I need IDR 60,...       1
+      Is the full membership fee affordable today, or should I wait? The an...       1
+      Should I pay for the course now, use installments, or wait? I need to...       1
+      The amount I want to send is IDR 12,693,000. Would sending the money ...       1
+      The annual plan comes to EUR 3,246.10. I need to complete it by 15 Se...       1
+      The current quote for the trip is IDR 46,018,000. I need to complete ...       1
+      The landlord has asked for a deposit of INR 122,500. Can I pay the re...       1
+      The price of the laptop is INR 266,700. I need to complete it by 10 F...       1
+      The professional course costs ZAR 65,164. Can I pay for the course be...       1
+      The repair I need is priced at EUR 996.60. Can I cover the full repai...       1
+      The transfer I have in mind is EUR 731.50. I need to complete it by 1...       1
+      What is the most I can put toward this repair right now? The latest e...       1
+      Would paying for the laptop today leave enough for my regular expense...       1
+
+  amount_safe_to_pay  (25 distinct)
+      122500                                                               1
+      12510645                                                             1
+      12700                                                                1
+      13420                                                                1
+      1425000                                                              1
+      1543.35                                                              1
+      166.61                                                               1
+      17229139.2                                                           1
+      243849.58                                                            1
+      25256                                                                1
+      284.57                                                               1
+      28820                                                                1
+      433.4                                                                1
+      462                                                                  1
+      475.46                                                               1
+      5400                                                                 1
+      597.74                                                               1
+      603.3                                                                1
+      65164                                                                1
+      737                                                                  1
+      83.05                                                                1
+      8401800                                                              1
+      87170.56                                                             1
+      873000                                                               1
+      9152                                                                 1
+
+  affordability_status  (4 distinct)
+      affordable_with_plan                                                 9
+      not_affordable                                                       7
+      affordable_later                                                     6
+      affordable_now                                                       3
+
+  recommended_payment_method  (5 distinct)
+      not_recommended                                                      7
+      full_payment                                                         6
+      wait                                                                 6
+      installments                                                         5
+      partial_payment                                                      1
+
+  payment_plan  (19 distinct)
+      none                                                                 7
+      2019-11-15:5491000                                                   1
+      2023-08-12:122500                                                    1
+      2024-03-03:25256                                                     1
+      2024-05-15:941.60                                                    1
+      2024-06-15:12693000                                                  1
+      2024-09-04:28820|2024-09-15:10840                                    1
+      2024-09-12:68432|2024-10-10:68432|2024-11-07:68432                   1
+      2024-12-08:253.59|2025-01-05:253.59|2025-02-02:253.59                1
+      2025-04-15:996.60                                                    1
+      2025-05-03:13110000                                                  1
+      2025-07-15:38016                                                     1
+      2025-08-08:15952906.67|2025-09-07:15952906.67|2025-10-07:15952906.67       1
+      2026-01-03:620.40                                                    1
+      2026-03-01:95194.67|2026-03-31:95194.67|2026-04-30:95194.67          1
+      2026-04-03:1574.40                                                   1
+      2026-04-19:22590.19|2026-05-20:22590.19|2026-06-20:22590.19          1
+      2026-07-04:166.61                                                    1
+      2026-09-15:3246.10                                                   1
+
+  earliest_date_for_full_payment  (17 distinct)
+      2025-07-15                                                           2
+      2019-11-15                                                           1
+      2023-08-12                                                           1
+      2024-03-03                                                           1
+      2024-05-15                                                           1
+      2024-06-15                                                           1
+      2024-09-15                                                           1
+      2024-10-23                                                           1
+      2025-01-15                                                           1
+      2025-04-15                                                           1
+      2025-09-15                                                           1
+      2026-01-15                                                           1
+      2026-03-15                                                           1
+      2026-04-05                                                           1
+      2026-04-15                                                           1
+      2026-07-04                                                           1
+      2026-09-15                                                           1
+
+  spending_changes_needed  (4 distinct)
+      none                                                                22
+      reduce_to:event_989:665950                                           1
+      stop:event_1815|reduce_to:event_1816:23.50                           1
+      stop:event_476                                                       1
+
+  decision_explanation  (25 distinct)
+      Do not make this payment by 1 February 2026. None of the available op...       1
+      Do not make this payment by 10 February 2025. None of the available o...       1
+      Do not make this payment by 12 January 2026. None of the available op...       1
+      Do not make this payment by 17 April 2024. None of the available opti...       1
+      Do not make this payment by 22 February 2026. None of the available o...       1
+      Do not proceed with the EUR 5,414.20 request. Although EUR 597.74 is ...       1
+      Do not proceed with the INR 109,600 request. Although INR 13,420 is a...       1
+      Pay EUR 166.61 today. This keeps the EUR 600 minimum available over t...       1
+      Pay EUR 3,246.10 in full on 15 September 2026. Paying earlier would t...       1
+      Pay EUR 941.60 in full on 15 May 2024. Paying earlier would take the ...       1
+      Pay EUR 996.60 in full on 15 April 2025. Paying earlier would take th...       1
+      Pay IDR 5,491,000 in full on 15 November 2019. Paying earlier would t...       1
+      Pay INR 122,500 today. This leaves at least INR 122,400 available ove...       1
+      Pay INR 28,820 today and the remaining INR 10,840 on 15 September 202...       1
+      Pay ZAR 25,256 today. This leaves at least ZAR 18,000 available over ...       1
+      Pay ZAR 38,016 in full on 15 July 2025. Paying earlier would take the...       1
+      Reduce the weekend food delivery to IDR 665,950, then pay IDR 13,110,...       1
+      Stop the family streaming plan, then pay EUR 620.40 today. This leave...       1
+      Stop the online backup subscription and reduce the streaming subscrip...       1
+      Use 3 installments of EUR 253.59, starting 8 December 2024. This leav...       1
+      Use 3 installments of IDR 15,952,906.67, starting 8 August 2025. This...       1
+      Use 3 installments of INR 68,432, starting 12 September 2024. This le...       1
+      Use 3 installments of INR 95,194.67, starting 1 March 2026. This leav...       1
+      Use 3 installments of ZAR 22,590.19, starting 19 April 2026. This lea...       1
+      Wait until 15 June 2024, then pay IDR 12,693,000 in full. Paying soon...       1
+
+SAMPLE VALUES (first few distinct values per high-cardinality column)
+------------------------------------------------------------------------------
+
+### financial_events.csv - focused checks ####################################
+event_type: 8 distinct, 0 blank
+    expense                                     20525
+    subscription                                 2488
+    income                                       1696
+    debt_payment                                  567
+    investment_purchase                            29
+    refund                                         22
+    investment_valuation                           10
+    investment_sale                                 5
+
+status: 6 distinct, 0 blank
+    settled                                     25148
+    pending                                        71
+    scheduled                                      70
+    cancelled                                      22
+    failed                                         21
+    unrealized                                     10
+
+flexibility: 4 distinct, 0 blank
+    fixed                                       21138
+    reducible                                    2682
+    stoppable                                    1297
+    reducible_or_stoppable                        225
+
+direction: 3 distinct, 0 blank
+    debit                                       23609
+    credit                                       1723
+    non_cash                                       10
+
+currency: 5 distinct, 0 blank
+    INR                                          6457
+    EUR                                          5585
+    IDR                                          4992
+    ZAR                                          4489
+    USD                                          3819
+
+category: 22 distinct, 0 blank
+    groceries                                    5812
+    transport                                    5626
+    dining                                       3479
+    salary                                       1690
+    utilities                                    1452
+    rent                                         1355
+    cloud_storage                                 833
+    shopping                                      813
+    streaming                                     683
+    debt_repayment                                553
+    entertainment                                 521
+    insurance                                     456
+    music_subscription                            451
+    healthcare                                    356
+    delivery_membership                           351
+    education                                     306
+    housing                                       246
+    gym                                           170
+    family_support                                125
+    investment                                     44
+    work_expense                                   14
+    windfall                                        6
+
+event_type x status matrix:
+    event_type                   cancelled        failed       pending     scheduled       settled    unrealized
+    debt_payment                         0             7             0             7           553             0
+    expense                             22            14            63            16         20410             0
+    income                               0             0             0            47          1649             0
+    investment_purchase                  0             0             0             0            29             0
+    investment_sale                      0             0             0             0             5             0
+    investment_valuation                 0             0             0             0             0            10
+    refund                               0             0             8             0            14             0
+    subscription                         0             0             0             0          2488             0
+
+recurrence / cadence fields:
+    NONE PRESENT. financial_events.csv has no explicit recurrence,
+    cadence, frequency or interval column. Recurrence must be INFERRED
+    from repeated (user_id, category, description) history and the
+    spacing between event dates.
+
+inferred monthly-recurrence signal (descriptive only):
+    distinct (user, category, description) groups: 8002
+    group-size distribution (how many times the same label repeats):
+        appears   1x :   1893 groups
+        appears   2x :   1599 groups
+        appears   3x :   1194 groups
+        appears   4x :    769 groups
+        appears   5x :   1929 groups
+        appears   6x :    480 groups
+        appears   7x :     78 groups
+        appears   8x :     34 groups
+        appears   9x :     14 groups
+        appears  10x :      9 groups
+        appears  11x :      2 groups
+        appears  12x :      1 groups
+    most common day-gaps between consecutive same-label events:
+          31 days :    4441
+          30 days :    2947
+          28 days :    1271
+          14 days :    1049
+           7 days :     898
+          21 days :     726
+          42 days :     635
+          35 days :     513
+          10 days :     451
+          70 days :     384
+          56 days :     375
+          20 days :     344
+
+rows with a BLANK amount: 16
+rows with amount exactly zero: 0
+    blank-amount rows by event_type:
+        expense                                 15
+        income                                   1
+    blank-amount rows by status:
+        pending                                  2
+        scheduled                                2
+        settled                                 12
+    blank-amount rows by direction:
+        credit                                   1
+        debit                                   15
+    blank-amount event_ids: event_10521, event_1442, event_1545, event_1700, event_1786, event_253, event_3051, event_3231, event_4535, event_5170, event_6033, event_6859, event_7307, event_7941, event_9421, event_9806
+
+rows with a linked_event_id: 58 of 25342
+    linked rows by event_type:
+        refund                                  22
+        expense                                 14
+        investment_valuation                    10
+        debt_payment                             7
+        investment_sale                          5
+    linked rows by status:
+        settled                                 27
+        pending                                 14
+        unrealized                              10
+        scheduled                                7
+    (parent status -> child status) pairs:
+        settled              -> settled                  19
+        settled              -> pending                  14
+        settled              -> unrealized               10
+        cancelled            -> settled                   8
+        failed               -> scheduled                 7
+    linked_event_id values not present as an event_id: 0
+    link targets referenced by more than one row: 0
+    links crossing user boundaries: 0 []
+
+minimum_allowed_amount vs flexibility:
+    flexibility=fixed                rows=21138    with minimum_allowed_amount=0
+    flexibility=reducible            rows=2682     with minimum_allowed_amount=2682
+    flexibility=reducible_or_stoppable rows=225      with minimum_allowed_amount=225
+    flexibility=stoppable            rows=1297     with minimum_allowed_amount=0
+    rows where minimum_allowed_amount > amount: 0 []
+
+settlement_date vs event_date:
+    settlement == event : 25154
+    settlement  > event : 178
+    settlement  < event : 0
+    one or both blank   : 10
+    blank settlement_date by status:
+        unrealized                               10
+
+### financial_profiles.csv - list-column contents ############################
+expense_categories_to_protect
+    rows with a blank value: 0 of 275
+    distinct tokens (10):
+        rent                                           232 users
+        groceries                                      166 users
+        transport                                      109 users
+        utilities                                      105 users
+        education                                       60 users
+        debt_repayment                                  56 users
+        insurance                                       46 users
+        healthcare                                      44 users
+        housing                                         43 users
+        family_support                                  25 users
+    distinct whole-value combinations (8):
+        rent|groceries|transport                                      63
+        rent|insurance|transport                                      46
+        rent|utilities|groceries                                      42
+        rent|education|groceries|debt_repayment                       36
+        rent|healthcare|family_support|groceries                      25
+        housing|utilities|education                                   24
+        rent|utilities|debt_repayment                                 20
+        housing|healthcare|utilities                                  19
+
+expense_categories_user_is_willing_to_reduce
+    rows with a blank value: 39 of 275
+    distinct tokens (5):
+        dining                                         153 users
+        shopping                                        72 users
+        streaming                                       66 users
+        entertainment                                   44 users
+        gym                                             14 users
+    distinct whole-value combinations (19):
+        dining                                                        80
+        <blank>                                                       39
+        shopping                                                      35
+        dining|streaming                                              22
+        dining|entertainment                                          20
+        streaming                                                     17
+        dining|streaming|shopping                                     12
+        dining|shopping                                               10
+        streaming|shopping                                             8
+        gym                                                            6
+        entertainment                                                  5
+        streaming|entertainment                                        5
+        dining|gym|entertainment                                       4
+        shopping|entertainment                                         4
+        dining|gym                                                     2
+        dining|shopping|entertainment                                  2
+        gym|entertainment                                              2
+        dining|streaming|entertainment                                 1
+        streaming|shopping|entertainment                               1
+
+expense_categories_user_is_willing_to_stop
+    rows with a blank value: 62 of 275
+    distinct tokens (5):
+        cloud_storage                                  109 users
+        streaming                                       84 users
+        music_subscription                              58 users
+        delivery_membership                             41 users
+        gym                                             12 users
+    distinct whole-value combinations (11):
+        <blank>                                                       62
+        cloud_storage                                                 57
+        streaming|cloud_storage                                       52
+        streaming                                                     32
+        music_subscription                                            26
+        music_subscription|delivery_membership                        24
+        delivery_membership                                           10
+        gym|music_subscription                                         4
+        gym|music_subscription|delivery_membership                     4
+        gym|delivery_membership                                        3
+        gym                                                            1
+
+financial_priorities
+    rows with a blank value: 0 of 275
+    distinct tokens (8):
+        emergency_savings                              171 users
+        education                                       94 users
+        retirement_investment                           61 users
+        debt_repayment                                  56 users
+        family_support                                  49 users
+        travel                                          46 users
+        healthcare                                      44 users
+        housing                                         29 users
+    distinct whole-value combinations (9):
+        emergency_savings|travel                                      46
+        retirement_investment|emergency_savings                       42
+        education|debt_repayment                                      36
+        education|emergency_savings                                   34
+        emergency_savings|housing                                     29
+        healthcare|family_support                                     25
+        education|family_support                                      24
+        debt_repayment|emergency_savings                              20
+        healthcare|retirement_investment                              19
+
+payment_methods_user_will_consider
+    rows with a blank value: 0 of 275
+    distinct tokens (3):
+        full_payment                                   163 users
+        installments                                   156 users
+        partial_payment                                139 users
+    distinct whole-value combinations (7):
+        full_payment                                                  60
+        partial_payment|installments                                  52
+        installments                                                  41
+        full_payment|partial_payment                                  40
+        full_payment|installments                                     35
+        full_payment|partial_payment|installments                     28
+        partial_payment                                               19
+
+max_installment_months
+    2                       15 users
+    3                       18 users
+    4                       17 users
+    5                       16 users
+    6                       13 users
+    7                       14 users
+    8                       10 users
+    9                        9 users
+    10                      12 users
+    11                      16 users
+    12                      16 users
+    <blank>                119 users
+    users with blank max_installment_months but 'installments' accepted: 0
+    users with max_installment_months set but 'installments' NOT accepted: 0
+
+minimum_balance_to_keep vs current_available_balance:
+    users already BELOW their minimum balance: 0
+    minimum/balance ratio  min=0.167  median=0.476  max=0.770
+
+protect / reduce / stop category overlap:
+    categories both PROTECTED and reducible: 0 users
+    categories both PROTECTED and stoppable: 0 users
+    categories both reducible and stoppable: 45 users
+        user_03: streaming
+        user_18: streaming
+        user_21: streaming
+        user_24: streaming
+        user_26: streaming
+        user_30: streaming
+        user_33: streaming
+        user_45: streaming
+        user_46: streaming
+        user_58: gym
+        user_75: streaming
+        user_78: streaming
+        user_79: streaming
+        user_94: streaming
+        user_98: streaming
+        user_99: streaming
+        user_100: streaming
+        user_114: streaming
+        user_117: streaming
+        user_118: streaming
+
+users who accept no payment method at all:
+    0 []
+
+### CROSS-FILE CHECKS vs AGENTS.md / problem_statement.md ####################
+requests.csv rows: 250  (README states 250)
+sample_requests.csv rows: 25  (README states 25)
+dataset/output.csv template rows: 250
+    request_id sets identical (requests vs output template): True
+    request_id order identical: True
+    request_ids appearing in BOTH requests.csv and sample_requests.csv: 0
+    duplicate request_id values in requests.csv: 0 []
+
+users:
+    financial_profiles.csv users: 275
+    distinct user_id in requests.csv: 250
+    request users missing a profile: []
+    request users with no financial_events rows: []
+    exactly one request per user: True
+    sample users also appearing in requests.csv: 0
+    profile users never referenced by any request: 0
+
+request_payment_options.csv:
+    distinct request_id covered: 275
+    option-count distribution (contract says 2-4 per request):
+        2 options: 65 requests
+        3 options: 180 requests
+        4 options: 30 requests
+    evaluation requests with NO payment options: 0 []
+    evaluation requests with no full_payment option: 0 []
+    payment_method values: {'full_payment': 275, 'installments': 515}
+    number_of_payments == 1 rows that are not full_payment: 0
+    blank payment_frequency_days on installment rows: 0
+    non-zero financing_fee on full_payment rows: 0
+    options where payment_amount * number_of_payments != total_payable_amount: 0
+    options where requested_amount + financing_fee != total_payable_amount: 0
+    options whose first_payment_date precedes request_date: 0 []
+
+installment options vs profile preferences:
+    installment options exceeding the user's max_installment_months: 193 ['payment_option_07', 'payment_option_09', 'payment_option_10', 'payment_option_14', 'payment_option_15', 'payment_option_21', 'payment_option_25', 'payment_option_26', 'payment_option_28', 'payment_option_35']
+    users offered installments who do not accept installments: 119
+    partial_payment rows present in request_payment_options.csv: 0
+
+images.csv:
+    rows: 16
+    PNG files in dataset/media/images: 16
+    image_ids with NO matching PNG on disk: 0 []
+    PNG files not referenced by images.csv: 0 []
+    related_event_id values not found in financial_events.csv: []
+    image request_ids not in requests.csv: ['request_03', 'request_16', 'request_17', 'request_19', 'request_20']
+    blank-amount events: 16; of those linked from images.csv: 16
+    blank-amount events with NO image link: []
+    images pointing at an event that already has an amount: []
+    evaluation requests with an image: 11 of 250
+
+messages.csv:
+    rows: 215
+    source_type values: {'employer': 126, 'service_provider': 31, 'bank': 18, 'merchant': 17, 'financial_service': 23}
+    rows with a related_event_id: 39
+    rows with a request_id: 128
+    related_event_id values not found in financial_events.csv: []
+    message request_ids in neither requests.csv nor sample_requests.csv: []
+    message user_ids with no profile: []
+    evaluation requests with at least one message: 116 of 250
+    messages-per-request distribution: {1: 116}
+    messages containing non-ASCII characters: 60
+    messages containing instruction-like phrasing (untrusted-content watchlist): 0 []
+
+exchange_rates.csv:
+    distinct currency pairs: 5
+        EUR -> USD       24 dated rows
+        EUR -> ZAR       22 dated rows
+        USD -> EUR       25 dated rows
+        USD -> IDR       30 dated rows
+        USD -> INR       33 dated rows
+    home_currency values in profiles: ['EUR', 'IDR', 'INR', 'USD', 'ZAR']
+    home currencies never present as a to_currency: []
+    currencies used by financial_events: ['EUR', 'IDR', 'INR', 'USD', 'ZAR']
+    pairs supplied in one direction only: 3
+        EUR -> ZAR
+        USD -> IDR
+        USD -> INR
+    rate_date range: 2023-10-15 .. 2026-11-15  (39 distinct dates)
+    rate_date day-of-month values: ['01', '15']
+    duplicate (date, from, to) rows: 0 []
+
+foreign-currency events vs available rates:
+    events in a currency other than the user's home_currency: 140
+    of those, with NO exact (settlement_date, from, to) rate row: 0
+
+requests.csv field sanity:
+    allows_partial_payment values: {'false': 170, 'true': 80}
+    request_type values: {'family_transfer': 28, 'purchase': 28, 'investment': 28, 'debt_repayment': 28, 'travel': 28, 'housing': 28, 'education': 28, 'emergency_expense': 27, 'other': 27}
+    desired_completion_date BEFORE request_date: 0 []
+    blank desired_completion_date: 0 []
+    desired_completion_date more than 90 days after request_date: 0 []
+    days from request_date to desired_completion_date: min=6 median=65 max=86
+    non-positive requested_amount: 0 []
+    request_date range: 2023-01-20 .. 2026-09-04
+
+requested_amount vs the user's balance and minimum:
+    requests larger than current_available_balance: 47 of 250
+    requests larger than (balance - minimum_balance_to_keep): 111 of 250
+    (an upper bound on how many can be affordable_now from the profile alone)
+
+events available relative to each request_date:
+    requests whose user has events dated AFTER request_date: 109 of 250
+    total future-dated event rows: 124
+    of those, dated beyond the 90-day horizon: 0
+    history depth per user (events at or before request_date) min/median/max:
+        56 / 98 / 129
+
+sample_requests.csv - label distributions (format reference, not labels):
+    affordability_status: {'affordable_with_plan': 9, 'not_affordable': 7, 'affordable_later': 6, 'affordable_now': 3}
+    recommended_payment_method: {'not_recommended': 7, 'full_payment': 6, 'wait': 6, 'installments': 5, 'partial_payment': 1}
+    spending_changes_needed: {'none': 22, 'stop:event_476': 1, 'reduce_to:event_989:665950': 1, 'stop:event_1815|reduce_to:event_1816:23.50': 1}
+    affordable_now rows where earliest_date_for_full_payment == request_date: 3 of 3
+    partial_payment rows: 1; all with status affordable_with_plan: True
+    partial_payment rows with exactly two plan entries: 1
+    sample rows violating 0 <= amount_safe_to_pay <= requested_amount: 0 []
+    sample rows with an empty earliest_date_for_full_payment: 7 ['request_05', 'request_10', 'request_14', 'request_15', 'request_20', 'request_24', 'request_25']
+    sample rows where earliest_date_for_full_payment is after desired_completion_date: 3 ['request_06', 'request_11', 'request_21']
+    installment sample rows whose plan does NOT match a supplied option: 0 []
+    sample rows whose payment_plan does not sum to requested_amount: 5
+        request_02     installments     plan sums to 47858720.01 vs requested 46018000.0
+        request_07     installments     plan sums to 205296.0 vs requested 197400.0
+        request_12     installments     plan sums to 67770.57 vs requested 65164.0
+        request_17     installments     plan sums to 285584.01 vs requested 274600.0
+        request_22     installments     plan sums to 760.77 vs requested 731.5
+    (expected for installments: the plan sums to total_payable_amount, which includes the financing fee)
+    sample rows whose first plan date is not request_date: 10 ['request_02', 'request_03', 'request_04', 'request_07', 'request_08', 'request_12', 'request_13', 'request_18', 'request_22', 'request_23']
+
+==============================================================================
+END OF AUDIT
+==============================================================================

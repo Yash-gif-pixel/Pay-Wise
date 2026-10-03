@@ -1,0 +1,7 @@
+log.txt
+__pycache__/
+*.pyc
+.env
+.venv/
+audit/traces/
+code.zip
